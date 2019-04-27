@@ -1,5 +1,7 @@
 package com.arthur.heap;
 
+import java.util.Arrays;
+
 public class Heap {
 
     private static int[] arr = null;
@@ -11,6 +13,10 @@ public class Heap {
     public static void main(String[] args) {
         initArr();
         buildHeap();
+        /*for (int ele : arr) {
+            System.out.println(ele);
+        }*/
+        insert(2);
         for (int ele : arr) {
             System.out.println(ele);
         }
@@ -25,8 +31,26 @@ public class Heap {
         while (currentIndex >= 0) {
             shifDown(currentIndex);
             currentIndex--;
-
         }
+    }
+
+    public static void insert(int ele) {
+        arr = Arrays.copyOf(arr, arr.length + 1);
+        arr[arr.length - 1] = ele;
+
+        int index = arr.length - 1;
+        while (index > 0) {
+            int parentIndex = (index - 1) / 2;
+            if (arr[index] >= arr[parentIndex]) {
+                break;
+            }
+            swap(parentIndex, index);
+            index = parentIndex;
+        }
+    }
+
+    public static int removeMin() {
+        return 0;
     }
 
     public static void shifDown(int currentIndex) {
@@ -37,7 +61,6 @@ public class Heap {
         }
         //获取该元素的2个子节点中的最小元素下标
         int minChildIndex = currentIndex * 2 + 1;
-
 
         if (validEle(minChildIndex) && arr[minChildIndex] > arr[minChildIndex + 1]) {
             minChildIndex++;
@@ -57,8 +80,6 @@ public class Heap {
     private static boolean validEle(int eleIndex) {
         return (eleIndex <= arr.length - 1) && (eleIndex + 1 <= arr.length - 1);
     }
-
-
 
     private static void swap(int fitstEleIndex, int secondEleIndex) {
         int temp = arr[fitstEleIndex];

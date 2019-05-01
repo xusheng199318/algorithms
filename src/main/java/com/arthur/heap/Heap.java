@@ -17,9 +17,13 @@ public class Heap {
             System.out.println(ele);
         }*/
         insert(2);
-        for (int ele : arr) {
+        /*for (int ele : arr) {
             System.out.println(ele);
-        }
+        }*/
+
+        heapSort();
+
+
     }
 
     /**
@@ -49,8 +53,25 @@ public class Heap {
         }
     }
 
+    public static void heapSort() {
+        while (arr.length > 0) {
+            int minEle = removeMin();
+            System.out.println(minEle);
+        }
+
+    }
+
     public static int removeMin() {
-        return 0;
+        int minEle = arr[0];
+        if (arr.length == 0) {
+            return minEle;
+        }
+        arr[0] = arr[arr.length - 1];
+        arr = Arrays.copyOf(arr, arr.length - 1);
+        if (arr.length > 1) {
+            shifDown(0);
+        }
+        return minEle;
     }
 
     public static void shifDown(int currentIndex) {

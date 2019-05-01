@@ -11,18 +11,19 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        initArr();
-        buildHeap();
+        //initArr();
+        //buildHeap();
         /*for (int ele : arr) {
             System.out.println(ele);
         }*/
-        insert(2);
+        //insert(2);
         /*for (int ele : arr) {
             System.out.println(ele);
         }*/
 
-        heapSort();
+        //heapSort();
 
+        topK(3);
 
     }
 
@@ -58,7 +59,26 @@ public class Heap {
             int minEle = removeMin();
             System.out.println(minEle);
         }
+    }
 
+    public static void topK(int k) {
+        int[] arr2top = new int[]{53, 17, 78, 9, 45, 65, 87, 23, 8, 20};
+        arr = new int[k];
+        for (int i = 0; i < k; i++) {
+            arr[i] = arr2top[i];
+        }
+        buildHeap();
+
+        for (int i = k; i < arr2top.length; i++) {
+            if (arr2top[i] > arr[0]) {
+                arr[0] = arr2top[i];
+                shifDown(0);
+            }
+        }
+
+        for (int ele : arr) {
+            System.out.println(ele);
+        }
     }
 
     public static int removeMin() {
